@@ -1,0 +1,4 @@
+# Used for remote server testing, copy to settings.yml and complete with proper credentials
+account: sample
+token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+use_ssl: true
