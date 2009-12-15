@@ -1,3 +1,11 @@
-Broach
+# Broach
 
 Implementation of the Campfire API.
+
+<pre><code>
+Broach.settings = {
+  'account' => 'myaccount',
+  'token'   => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  'use_ssl' => true
+}
+</code></pre>

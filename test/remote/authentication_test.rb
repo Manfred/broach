@@ -1,17 +1,13 @@
 require File.expand_path('../../start', __FILE__)
 
 class AuthentiationTest < Test::Unit::TestCase
-  def setup
-    @settings = YAML.load_file(File.expand_path('../../../settings.yml', __FILE__))
-  end
-  
   def test_authenticates_with_proper_credentials
-    session = Broach::Session.new(@settings)
+    session = Broach::Session.new(settings)
     assert session.me.has_key?('user')
   end
   
   def test_raises_authentication_error_with_improper_credentials
-    session = Broach::Session.new(@settings.merge('token' => 'wrong'))
+    session = Broach::Session.new(settings.merge('token' => 'wrong'))
     begin
       session.me.has_key?('user')
     rescue Broach::AuthenticationError => e

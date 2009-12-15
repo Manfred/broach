@@ -1,19 +1,7 @@
-require 'broach/exceptions'
-
 module Broach
   class Session
     attr_accessor :account, :token, :use_ssl
-    
-    def initialize(attributes)
-      attributes.each do |key, value|
-        accessor = "#{key}="
-        if respond_to?(accessor)
-          send(accessor, value)
-        else
-          raise ArgumentError, "Unknown setting `#{key}'"
-        end
-      end
-    end
+    include Broach::AttributeInitializer
     
     # Returns true when the connection should use SSL and false otherwise.
     def use_ssl?; use_ssl; end
@@ -24,6 +12,10 @@ module Broach
     
     def scheme
       use_ssl? ? 'https:/' : 'http:/'
+    end
+    
+    def rooms
+      fetch('rooms')
     end
     
     def fetch(path)

@@ -7,6 +7,10 @@ end
 require 'rest'
 require 'json'
 
+require 'broach/exceptions'
+
 module Broach
-  autoload :Session, 'broach/session'
+  autoload :AttributeInitializer, 'broach/attribute_initializer'
+  
+  autoload :Session,              'broach/session'
 end
