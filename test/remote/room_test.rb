@@ -12,12 +12,18 @@ describe "Room" do
     end
   end
   
-  it "should fetch a specific room" do
+  it "should fetch a room with a specific ID" do
     if room_to_fetch = Broach::Room.all.first
       room = Broach::Room.find(room_to_fetch.id)
       room.id.should == room_to_fetch.id
       room.name.should.not == ''
     end
+  end
+  
+  it "should fetch a room with a specific name" do
+    name = Broach.session.room
+    room = Broach::Room.find_by_name(name)
+    room.name.should == name
   end
 end
 

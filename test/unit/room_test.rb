@@ -16,7 +16,7 @@ describe "Room" do
     end
   end
   
-  it "should find a room with a certain ID from the server" do
+  it "should find a room with a certain ID on the server" do
     mock_response('room/65667', { "room" =>  {
       "id" => 65667, "name" => "Office"
     }})
@@ -24,7 +24,7 @@ describe "Room" do
     room.id.should == 65667
   end
   
-  it "should find a room with a certain name" do
+  it "should find a room with a certain name on the server" do
     office_room   = mock('Room', :name => 'Office')
     business_room = mock('Room', :name => 'Business')
     Broach::Room.stub!(:all).and_return([office_room, business_room])
