@@ -1,6 +1,6 @@
 # Broach
 
-Implementation of the Campfire API.
+Broach is an implementation of the Campfire API. You can find more information about the API on http://developer.37signals.com/campfire.
 
 ## Say something real quick
 
@@ -11,21 +11,4 @@ Broach.settings = {
   'use_ssl' => true
 }
 Broach.speak('Office', 'Manfred just deployed a new version of the weblog (http://www.fngtps.com)')
-</code></pre>
-
-## Keep saying stuff in a specific room
-
-<pre><code>
-Broach.settings = {
-  'account' => 'myaccount',
-  'token'   => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-  'use_ssl' => true
-}
-room = Broach.rooms.find { |room| room.name == 'Office' }
-room.speak('Manfred just commited to the `weblog' repository')
-room.speak("commit 4578530113cb87e1e7dbd696c376181e97d429d7
-Author: Manfred Stienstra <manfred@fngtps.com>
-Date:   Wed Dec 16 14:03:33 2009 +0100
-
-    Add a speak method to Broach to quickly say something in a room.", :type => :paste)
 </code></pre>

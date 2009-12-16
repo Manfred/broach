@@ -1,37 +1,65 @@
-begin
-  require 'rubygems'
-  gem 'nap', '>= 0.3'
-rescue LoadError
-end
-
+require 'rubygems' rescue nil
 require 'rest'
 require 'json'
 
 require 'broach/exceptions'
 
+# === Settings
+#
+# Before you can do anything else you will need to provide credentials first, this includes the account name and
+# authentication token. The +use_ssl+ parameter is optional and defaults to false.
+#
+#   Broach.settings = { 'account' => 'example', 'token' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'use_ssl' => true }
+#
+# You can find the token for any Campfire account by logging into the web interface and clicking 'My Info' in the top-right
+# corner.
+#
+# === Say someting in a room real quick
+#
+# If you just need to say something real quick in a room, you can use the speak class method.
+#
+#  Broach.speak("Office", "Manfred just deployed a new version of the weblog (http://www.fngtps.com)")
+#
+# Note that this fetches a list of all rooms so it can figure out the ID for the room you specified.
+#
+# === Post a lot of stuff to a room
+#
+# If you want to post multiple lines to one room, it's a good idea to create a Room instance.
+#
+#   room = Broach.rooms.find { |room| room.name == 'Office' }
+#   room.speak('Manfred just commited to the `weblog' repository')
+#   room.speak("commit 4578530113cb87e1e7dbd696c376181e97d429d7\n" +
+#     "Author: Manfred Stienstra <manfred@fngtps.com>\n" +
+#     "Date:   Wed Dec 16 14:03:33 2009 +0100\n\n" +
+#     "  Add a speak method to Broach to quickly say something in a room.", :type => :paste)
 module Broach
   autoload :Attributes, 'broach/attributes'
   autoload :Session,    'broach/session'
   autoload :User,       'broach/user'
   autoload :Room,       'broach/room'
   
+  # Returns the current Broach settings
   def self.settings
     @settings
   end
   
+  # Sets the broach settings
   def self.settings=(settings)
     @settings = settings
     @session  = nil
   end
   
+  # Returns a session object with the current settings
   def self.session
     @session ||= Broach::Session.new(settings)
   end
   
+  # Returns a User instance for the currently authenticated user
   def self.me
     Broach::User.me
   end
   
+  # Returns a Room instance for all rooms accesible to the currently authenticated user
   def self.rooms
     Broach::Room.all
   end
