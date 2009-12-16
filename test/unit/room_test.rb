@@ -89,4 +89,14 @@ describe "A Room, concerning messages" do
     }).and_return({'message' => {}})
     @room.speak(12)
   end
+  
+  it "should have a shortcut to send sounds" do
+    @room.should.receive(:speak).with('crickets', :type => :sound)
+    @room.sound('crickets')
+  end
+  
+  it "should have a shortcut to send pastes" do
+    @room.should.receive(:speak).with('Codes!', :type => :paste)
+    @room.paste('Codes!')
+  end
 end

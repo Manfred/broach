@@ -36,6 +36,20 @@ module Broach
       })['message']
     end
     
+    # Sends a sound to the room
+    #
+    # This is basically a shortcut for speak(name, :type => :sound)
+    def sound(name)
+      speak(name, :type => :sound)
+    end
+    
+    # Sends a paste to the room
+    #
+    # This is basically a shortcut for speak(content, :type => :paste)
+    def paste(content)
+      speak(content, :type => :paste)
+    end
+    
     private
     
     def friendly_coerce_to_string(content)
