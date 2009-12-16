@@ -32,8 +32,18 @@ module Broach
       options[:type] ||= :text
       Broach.session.post("room/#{id}/speak", 'message' => {
         'type' => TYPE_MAP[options[:type]],
-        'body' => content
+        'body' => friendly_coerce_to_string(content)
       })['message']
+    end
+    
+    private
+    
+    def friendly_coerce_to_string(content)
+      if content.respond_to?(:join)
+        content.join(' ')
+      else
+        content.to_s
+      end
     end
     
     # Returns a Room instance for all rooms accessible to the authenticated user

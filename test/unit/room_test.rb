@@ -73,4 +73,20 @@ describe "A Room, concerning messages" do
     }).and_return({'message' => {}})
     @room.speak('crickets', :type => :sound)
   end
+  
+  it "should coerce content arrays of strings to a string" do
+    Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
+      'type' => 'TextMessage',
+      'body' => 'Hi there'
+    }).and_return({'message' => {}})
+    @room.speak(['Hi', 'there'])
+  end
+  
+  it "should coerce content objects to a string" do
+    Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
+      'type' => 'TextMessage',
+      'body' => '12'
+    }).and_return({'message' => {}})
+    @room.speak(12)
+  end
 end
