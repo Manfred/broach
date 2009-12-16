@@ -11,23 +11,29 @@ module Broach
       use_ssl? ? 'https' : 'http'
     end
     
+    def url_for(path)
+      ["#{scheme}:/", "#{account}.campfirenow.com", path].join('/')
+    end
+    
+    def headers
+      { 'Accept'     => 'application/json', 'User-Agent' => 'Broach' }
+    end
+    
+    def credentials
+      { :username => token, :password => 'x' }
+    end
+    
     def fetch(path)
-      url      = ["#{scheme}:/", "#{account}.campfirenow.com", path].join('/')
-      response = REST.get(url, {
-        'Accept'     => 'application/json',
-        'User-Agent' => 'Broach'
-      }, {
-        :username => token, :password => 'x'
-      })
+      response = REST.get(url_for(path), headers, credentials)
       
       if response.ok?
         return JSON.parse(response.body) 
       elsif response.unauthorized?
-        exception = ::Broach::AuthenticationError.new("Couldn't authenticate with the supplied credentials for the account `#{account}'")
+        exception = Broach::AuthenticationError.new("Couldn't authenticate with the supplied credentials for the account `#{account}'")
       elsif response.forbidden?
-        exception = ::Broach::AuthorizationError.new("Couldn't fetch the resource `#{path}' on the account `#{account}'")
+        exception = Broach::AuthorizationError.new("Couldn't fetch the resource `#{path}' on the account `#{account}'")
       else
-        exception = ::Broach::APIError.new("Response from the server was unexpected (#{response.status_code})")
+        exception = Broach::APIError.new("Response from the server was unexpected (#{response.status_code})")
       end
       
       exception.response = response
