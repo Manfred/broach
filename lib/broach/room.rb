@@ -43,9 +43,16 @@ module Broach
       end
     end
     
-    # Returns a Room instance for a room with a specific ID
+    # Returns a Room instance for a room with a specific ID, raises an exception when it
+    # can't find the room.
     def self.find(id)
       new(Broach.session.get("room/#{id.to_i}")['room'])
+    end
+    
+    # Returns a Room instance for a room with a specific name, returns nil when it can't find
+    # the room.
+    def self.find_by_name(name)
+      all.find { |room| room.name == name }
     end
   end
 end

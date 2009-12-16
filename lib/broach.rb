@@ -26,7 +26,7 @@ require 'broach/exceptions'
 #
 # If you want to post multiple lines to one room, it's a good idea to create a Room instance.
 #
-#   room = Broach.rooms.find { |room| room.name == 'Office' }
+#   room = Broach::Room.find_by_name('Office')
 #   room.speak('Manfred just commited to the `weblog' repository')
 #   room.speak("commit 4578530113cb87e1e7dbd696c376181e97d429d7\n" +
 #     "Author: Manfred Stienstra <manfred@fngtps.com>\n" +

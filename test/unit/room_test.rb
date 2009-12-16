@@ -23,6 +23,16 @@ describe "Room" do
     room = Broach::Room.find(65667)
     room.id.should == 65667
   end
+  
+  it "should find a room with a certain name" do
+    office_room   = mock('Room', :name => 'Office')
+    business_room = mock('Room', :name => 'Business')
+    Broach::Room.stub!(:all).and_return([office_room, business_room])
+    
+    Broach::Room.find_by_name('Office').should == office_room
+    Broach::Room.find_by_name('Business').should == business_room
+    Broach::Room.find_by_name('Unknown').should == nil
+  end
 end
 
 describe "A Room, concerning messages" do
