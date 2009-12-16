@@ -1,25 +1,18 @@
 module Broach
   class Session
-    attr_accessor :account, :token, :use_ssl
-    include Broach::AttributeInitializer
+    include Broach::Attributes
     
     # Returns true when the connection should use SSL and false otherwise.
-    def use_ssl?; use_ssl; end
-    
-    def me
-      fetch('users/me')
+    def use_ssl?
+      @attributes['use_ssl'] || false
     end
     
     def scheme
-      use_ssl? ? 'https:/' : 'http:/'
-    end
-    
-    def rooms
-      fetch('rooms')
+      use_ssl? ? 'https' : 'http'
     end
     
     def fetch(path)
-      url      = [scheme, "#{account}.campfirenow.com", path].join('/')
+      url      = ["#{scheme}:/", "#{account}.campfirenow.com", path].join('/')
       response = REST.get(url, {
         'Accept'     => 'application/json',
         'User-Agent' => 'Broach'

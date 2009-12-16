@@ -1,6 +1,15 @@
 module Broach
   class Room
-    attr_accessor :session, :room_id
-    include Broach::AttributeInitializer
+    include Broach::Attributes
+    
+    def self.all
+      Broach.session.fetch('rooms')['rooms'].map do |attributes|
+        Broach::Room.new(attributes)
+      end
+    end
+    
+    def self.find(id)
+      new(Broach.session.fetch("room/#{id.to_i}")['room'])
+    end
   end
 end

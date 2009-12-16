@@ -1,16 +1,22 @@
 require 'rubygems' rescue nil
-require 'test/unit'
+require 'bacon'
+require 'facon'
 
 $:.unshift(File.expand_path('../../lib', __FILE__))
-
 require 'broach'
 
 module BroachTestHelpers
   def settings
     @settings ||= YAML.load_file(File.expand_path('../../settings.yml', __FILE__))
   end
+  
+  def mock_response(path, payload)
+    Broach.session.stub!(:fetch).with(path).and_return(payload)
+  end
 end
 
-class Test::Unit::TestCase
+class Bacon::Context
   include BroachTestHelpers
 end
+
+Bacon.extend Bacon::TapOutput
