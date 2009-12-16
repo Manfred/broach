@@ -28,7 +28,7 @@ module Broach
       Broach.session.post("room/#{id}/speak", 'message' => {
         'type' => TYPE_MAP[options[:type]],
         'body' => content
-      })
+      })['message']
     end
     
     def self.all

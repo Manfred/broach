@@ -36,7 +36,7 @@ describe "A Room, concerning messages" do
     Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
       'type' => 'TextMessage',
       'body' => 'Howdy'
-    })
+    }).and_return({'message' => {}})
     @room.speak('Howdy')
   end
   
@@ -44,7 +44,7 @@ describe "A Room, concerning messages" do
     Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
       'type' => 'TextMessage',
       'body' => 'Howdy'
-    })
+    }).and_return({'message' => {}})
     @room.speak('Howdy', :type => :text)
   end
   
@@ -52,7 +52,7 @@ describe "A Room, concerning messages" do
     Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
       'type' => 'PasteMessage',
       'body' => '<code></code>'
-    })
+    }).and_return({'message' => {}})
     @room.speak('<code></code>', :type => :paste)
   end
   
@@ -60,7 +60,7 @@ describe "A Room, concerning messages" do
     Broach.session.should.receive(:post).with('room/12/speak', 'message' => {
       'type' => 'SoundMessage',
       'body' => 'crickets'
-    })
+    }).and_return({'message' => {}})
     @room.speak('crickets', :type => :sound)
   end
 end

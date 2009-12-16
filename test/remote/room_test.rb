@@ -32,18 +32,18 @@ describe "A Room" do
   it "should speak text" do
     body = 'Should speak text'
     message = @room.speak(body)
-    message['message']['body'].should == body
+    message['body'].should == body
   end
 
   it "should speak paste" do
     body = 'Should speak paste'
     message = @room.speak(body, :type => :paste)
-    message['message']['body'].should == body
+    message['body'].should == body
   end
   
   it "should speak sound" do
     body = 'crickets'
     message = @room.speak(body, :type => :sound)
-    message['message']['body'].should == body
+    message['body'].should == body
   end
 end
