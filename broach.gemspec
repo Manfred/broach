@@ -2,7 +2,7 @@ require 'rake'
 
 Gem::Specification.new do |spec|
   spec.name = 'broach'
-  spec.version = '0.1.1'
+  spec.version = '0.1.2'
   
   spec.author = "Manfred Stienstra"
   spec.email = "manfred@fngtps.com"
