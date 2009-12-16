@@ -1,4 +1,5 @@
 module Broach
+  # Represents a chat room on the server
   class Room
     TYPE_MAP = {
       :text  => 'TextMessage',
@@ -10,9 +11,13 @@ module Broach
     
     # Send a message to the room
     #
-    # ==== Options
+    # ==== Parameters and options
     #
-    # [+:type+]
+    # [+content+]
+    #   Content to send. For a normal text message this is the content of the message. For a paste
+    #   it's the content of the paste. For a sound it's the name of the sound.
+    #
+    # [<tt>:type</tt>]
     #   The type of message to send, this is :text by default for normal text messages.
     #   You can also use :paste and :sound. Valid sound messages are 'rimshot', 'crickets',
     #   or 'trombone'.
@@ -31,12 +36,14 @@ module Broach
       })['message']
     end
     
+    # Returns a Room instance for all rooms accessible to the authenticated user
     def self.all
       Broach.session.get('rooms')['rooms'].map do |attributes|
         Broach::Room.new(attributes)
       end
     end
     
+    # Returns a Room instance for a room with a specific ID
     def self.find(id)
       new(Broach.session.get("room/#{id.to_i}")['room'])
     end

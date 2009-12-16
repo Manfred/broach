@@ -35,7 +35,7 @@ end
 
 namespace :documentation do
   Rake::RDocTask.new(:generate) do |rd|
-    rd.main = "README"
+    rd.main = "lib/broach.rb"
     rd.rdoc_files.include("lib/**/*.rb")
     rd.options << "--all" << "--charset" << "utf-8"
   end

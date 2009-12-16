@@ -1,4 +1,5 @@
 module Broach
+  # Makes a very simple attribute driven model from the class when included.
   module Attributes
     def initialize(attributes)
       @attributes = attributes
