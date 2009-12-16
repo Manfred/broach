@@ -2,3 +2,4 @@
 account: sample
 token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 use_ssl: true
+room: My test room

@@ -15,27 +15,44 @@ module Broach
       ["#{scheme}:/", "#{account}.campfirenow.com", path].join('/')
     end
     
-    def headers
-      { 'Accept'     => 'application/json', 'User-Agent' => 'Broach' }
+    def headers_for(method)
+      headers = { 'Accept' => 'application/json', 'User-Agent' => 'Broach' }
+      headers['Content-type'] = 'application/json' if method == :post
+      headers
     end
     
     def credentials
       { :username => token, :password => 'x' }
     end
     
-    def fetch(path)
-      response = REST.get(url_for(path), headers, credentials)
-      
+    def get(path)
+      response = REST.get(url_for(path), headers_for(:get), credentials)
       if response.ok?
-        return JSON.parse(response.body) 
-      elsif response.unauthorized?
-        exception = Broach::AuthenticationError.new("Couldn't authenticate with the supplied credentials for the account `#{account}'")
-      elsif response.forbidden?
-        exception = Broach::AuthorizationError.new("Couldn't fetch the resource `#{path}' on the account `#{account}'")
+        return JSON.parse(response.body)
       else
-        exception = Broach::APIError.new("Response from the server was unexpected (#{response.status_code})")
+        handle_response(:get, path, response)
       end
-      
+    end
+    
+    def post(path, payload)
+      response = REST.post(url_for(path), JSON.dump(payload), headers_for(:post), credentials)
+      if response.created?
+        return JSON.parse(response.body)
+      else
+        handle_response(:post, path, response)
+      end
+    end
+    
+    private
+    
+    def handle_response(method, path, response)
+      exception = if response.unauthorized?
+        Broach::AuthenticationError.new("Couldn't authenticate with the supplied credentials for the account `#{account}'")
+      elsif response.forbidden?
+        Broach::AuthorizationError.new("Couldn't #{method.to_s.upcase} the resource `#{path}' on the account `#{account}'")
+      else
+        Broach::APIError.new("Response from the server was unexpected (#{response.status_code})")
+      end
       exception.response = response
       raise exception
     end

@@ -11,7 +11,7 @@ module BroachTestHelpers
   end
   
   def mock_response(path, payload)
-    Broach.session.stub!(:fetch).with(path).and_return(payload)
+    Broach.session.stub!(:get).with(path).and_return(payload)
   end
 end
 
