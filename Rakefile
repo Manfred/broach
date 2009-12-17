@@ -1,26 +1,23 @@
 require 'rake/rdoctask'
 
-desc "Run all specs by default"
+TEST_CATEGORIES = [:remote, :interaction, :unit]
+
+desc "Run all unit specs by default"
 task :default => 'test:unit'
 
 namespace :test do
-  desc "Run all remote tests"
-  task :remote do
-    Dir[File.dirname(__FILE__) + '/test/remote/*_test.rb'].each do |file|
-      load file
-    end
-  end
-  
-  desc "Run all unit tests"
-  task :unit do
-    Dir[File.dirname(__FILE__) + '/test/unit/*_test.rb'].each do |file|
-      load file
+  TEST_CATEGORIES.each do |category|
+    desc "Run all #{category} tests"
+    task category do
+      Dir[File.dirname(__FILE__) + "/test/#{category}/*_test.rb"].each do |file|
+        load file
+      end
     end
   end
 end
 
 desc "Run all specs"
-task :test => ['test:unit', 'test:remote']
+task :test => TEST_CATEGORIES.map { |category| "test:#{category}" }
 
 namespace :gem do
   desc "Build the gem"

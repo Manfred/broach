@@ -39,7 +39,7 @@ module Broach
     def get(path)
       response = REST.get(url_for(path), headers_for(:get), credentials)
       if response.ok?
-        return JSON.parse(response.body)
+        JSON.parse(response.body)
       else
         handle_response(:get, path, response)
       end
@@ -48,9 +48,9 @@ module Broach
     # Posts a resource to a certain path on the server. When the POST is successful
     # the parsed body is returned, otherwise an exception is raised.
     def post(path, payload)
-      response = REST.post(url_for(path), JSON.dump(payload), headers_for(:post), credentials)
+      response = REST.post(url_for(path), payload.to_json, headers_for(:post), credentials)
       if response.created?
-        return JSON.parse(response.body)
+        JSON.parse(response.body)
       else
         handle_response(:post, path, response)
       end
