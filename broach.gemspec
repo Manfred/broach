@@ -1,11 +1,11 @@
 require 'rake'
 
 Gem::Specification.new do |spec|
-  spec.name = 'broach'
-  spec.version = '0.1.4'
+  spec.name = 'tfe-broach'
+  spec.version = '0.1.5'
   
-  spec.author = "Manfred Stienstra"
-  spec.email = "manfred@fngtps.com"
+  spec.authors = ["Manfred Stienstra", "Todd Eichel"]
+  spec.email = ["manfred@fngtps.com", "todd@toddeichel.com"]
 
   spec.description = <<-EOF
     Ruby implementation of 37signal's Campfire API.
