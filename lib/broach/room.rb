@@ -4,7 +4,8 @@ module Broach
     TYPE_MAP = {
       :text  => 'TextMessage',
       :paste => 'PasteMessage',
-      :sound => 'SoundMessage'
+      :sound => 'SoundMessage',
+      :tweet => 'TweetMessage'
     }
     
     include Broach::Attributes
