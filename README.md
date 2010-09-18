@@ -26,3 +26,8 @@ Broach.speak('Office', 'Manfred just deployed a new version of the weblog (http:
 The easiest way to install Broach and its dependencies is to install the gem.
 
 <pre><code>$ gem install broach</code></pre>
+
+## Contributors
+
+Eloy Duran <eloy@fngtps.com>
+Todd Eichel <todd@toddeichel.com>
