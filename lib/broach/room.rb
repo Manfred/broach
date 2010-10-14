@@ -51,6 +51,33 @@ module Broach
       speak(content, :type => :paste)
     end
     
+    # Get recent messages
+    #
+    # ==== Parameters and options
+    #
+    # [+limit+]
+    #   Limit the number of messages. Default is 100.
+    #
+    # [+since_message_id+]
+    #   If specified, return messages since the specified message id.
+    def recent(limit = 100, since_message_id = nil)
+      Broach.session.get("room/#{id}/recent?limit=#{limit}&since_message_id=#{since_message_id}")['messages']
+    end
+    
+    # Get the transcript for the given date
+    #
+    # ==== Parameters and options
+    #
+    # [+date+]
+    #   If specified, get the transcript for this specific date.
+    def transcript(date = nil)
+      if date
+        Broach.session.get("room/#{id}/transcript/#{date.strftime('%Y/%m/%d')}")['messages']
+      else
+        Broach.session.get("room/#{id}/transcript")['messages']
+      end
+    end
+    
     private
     
     def friendly_coerce_to_string(content)
