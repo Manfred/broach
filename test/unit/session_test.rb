@@ -101,8 +101,19 @@ describe "A Session, when fetching resources" do
     end
   end
   
+  it "should raise a configuration error when the response was a 302" do
+    response = mock('Response', :ok? => false, :unauthorized? => false, :forbidden? => false, :found? => true)
+    REST.stub!(:get).and_return(response)
+    begin
+      example_session.get('room/12')
+    rescue Broach::ConfigurationError => error
+      error.response.should == response
+      error.message.should == "Got redirected when trying to GET the resource `room/12' on the account `example'"
+    end
+  end
+  
   it "should raise a general API error when the response was not expected" do
-    response = mock('Response', :ok? => false, :unauthorized? => false, :forbidden? => false, :status_code => 422)
+    response = mock('Response', :ok? => false, :unauthorized? => false, :forbidden? => false, :found? => false, :status_code => 422)
     REST.stub!(:get).and_return(response)
     begin
       example_session.get('room/12')
@@ -161,8 +172,19 @@ describe "A Session, when posting a resource" do
     end
   end
   
+  it "should raise a configuration error when the response was a 302" do
+    response = mock('Response', :created? => false, :unauthorized? => false, :forbidden? => false, :found? => true)
+    REST.stub!(:post).and_return(response)
+    begin
+      example_session.post('room/12/speak', {})
+    rescue Broach::ConfigurationError => error
+      error.response.should == response
+      error.message.should == "Got redirected when trying to POST the resource `room/12/speak' on the account `example'"
+    end
+  end
+  
   it "should raise a general API error when the response was not expected" do
-    response = mock('Response', :created? => false, :unauthorized? => false, :forbidden? => false, :status_code => 422)
+    response = mock('Response', :created? => false, :unauthorized? => false, :forbidden? => false, :found? => false, :status_code => 422)
     REST.stub!(:post).and_return(response)
     begin
       example_session.post('room/12/speak', {})

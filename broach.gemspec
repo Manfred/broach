@@ -1,8 +1,6 @@
-require 'rake'
-
 Gem::Specification.new do |spec|
   spec.name = 'tfe-broach'
-  spec.version = '0.1.5'
+  spec.version = '0.2.0'
   
   spec.authors = ["Manfred Stienstra", "Todd Eichel"]
   spec.email = ["manfred@fngtps.com", "todd@toddeichel.com"]
@@ -16,7 +14,15 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('nap', '>= 0.3')
 
-  spec.files = FileList['LICENSE', 'lib/**/*.rb'].to_a
+  spec.files = [
+    'LICENSE',
+    'lib/broach/attributes.rb',
+    'lib/broach/exceptions.rb',
+    'lib/broach/room.rb',
+    'lib/broach/session.rb',
+    'lib/broach/user.rb',
+    'lib/broach.rb',
+    ]
 
   spec.has_rdoc = true
   spec.extra_rdoc_files = ['LICENSE']
