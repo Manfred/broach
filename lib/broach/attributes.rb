@@ -8,8 +8,8 @@ module Broach
     def id; @attributes['id']; end
     
     def method_missing(method, *arguments, &block)
-      if value = @attributes[method.to_s]
-        value
+      if @attributes.has_key?(method.to_s)
+        @attributes[method.to_s]
       else
         super
       end
