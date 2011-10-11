@@ -1,4 +1,3 @@
-require 'rubygems' rescue nil
 require 'rest'
 require 'json'
 
