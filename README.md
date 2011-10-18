@@ -29,7 +29,8 @@ The easiest way to install Broach and its dependencies is to install the gem.
 
 ## Contributors
 
-Eloy Duran <eloy@fngtps.com>
-Ilya Sabanin <ilya.sabanin@gmail.com>
-Todd Eichel <todd@toddeichel.com>
-Anton Mironov <ant.mironov@gmail.com>
+* Eloy Duran <eloy@fngtps.com>
+* Ilya Sabanin <ilya.sabanin@gmail.com>
+* Todd Eichel <todd@toddeichel.com>
+* Anton Mironov <ant.mironov@gmail.com>
+* Rich Meyers
