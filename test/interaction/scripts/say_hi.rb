@@ -1,5 +1,6 @@
-require 'rubygems' rescue nil
+require 'rubygems'
 require 'active_support'
+require 'yaml'
 require 'rest'
 
 $:.unshift File.expand_path('../../../../lib', __FILE__)

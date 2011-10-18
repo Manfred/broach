@@ -1,4 +1,9 @@
-require 'rubygems' rescue nil
+begin
+  require 'rubygems'
+rescue
+  puts "[!] Couldn't require Rubygems, please make sure all required libraries are in the load path"
+end
+
 require 'bacon'
 require 'facon'
 
