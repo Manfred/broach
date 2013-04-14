@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
     Ruby implementation of 37signal's Campfire API.
   EOF
 
-  spec.add_dependency('nap',  '~> 0.3')
-  spec.add_dependency('json', '~> 1.4')
+  spec.add_dependency('nap',        '~> 0.5')
+  spec.add_dependency('multi_json', '~> 1.7')
 
   spec.files = [
     'LICENSE',

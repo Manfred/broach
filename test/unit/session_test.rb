@@ -75,7 +75,7 @@ describe "A Session, when fetching resources" do
   
   it "should return the parsed body when the response was OK" do
     payload = { 'room' => { 'id' => 12 } }
-    REST.stub!(:get).and_return(mock('Response', :ok? => true, :body => JSON.dump(payload)))
+    REST.stub!(:get).and_return(mock('Response', :ok? => true, :body => MultiJson.dump(payload)))
     example_session.get('room/12').should == payload
   end
   
@@ -135,7 +135,7 @@ describe "A Session, when posting a resource" do
     payload = { 'message' => { 'body' => 'Heya', 'type' => 'TextMessage' } }
     REST.should.receive(:post).with(
       example_session.url_for('room/12/speak'),
-      JSON.dump(payload),
+      MultiJson.dump(payload),
       example_session.headers_for(:post),
       example_session.credentials
     ).and_return(
@@ -146,7 +146,7 @@ describe "A Session, when posting a resource" do
   
   it "should return the parsed body when the response was OK" do
     payload = { 'message' => { 'id' => 12 } }
-    REST.stub!(:post).and_return(mock('Response', :created? => true, :body => JSON.dump(payload)))
+    REST.stub!(:post).and_return(mock('Response', :created? => true, :body => MultiJson.dump(payload)))
     example_session.post('room/12/speak', {}).should == payload
   end
   

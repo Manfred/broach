@@ -1,5 +1,5 @@
 require 'rest'
-require 'json'
+require 'multi_json'
 
 require 'broach/exceptions'
 
