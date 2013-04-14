@@ -15,6 +15,7 @@ GEM
     facon (0.5.0)
     multi_json (1.7.2)
     nap (0.5.1)
+    rake (10.0.4)
 
 PLATFORMS
   ruby
@@ -24,3 +25,4 @@ DEPENDENCIES
   bacon
   broach!
   facon
+  rake
