@@ -1,4 +1,8 @@
-require 'rake/rdoctask'
+begin
+  require 'rdoc/task'
+rescue LoadError
+  require 'rake/rdoctask'
+end
 
 TEST_CATEGORIES = [:remote, :interaction, :unit]
 
