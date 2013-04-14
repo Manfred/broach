@@ -6,6 +6,7 @@ end
 
 require 'bacon'
 require 'facon'
+require 'yaml'
 
 $:.unshift(File.expand_path('../../lib', __FILE__))
 require 'broach'
